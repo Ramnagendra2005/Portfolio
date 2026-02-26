@@ -1,8 +1,5 @@
 import { useState, useEffect, useRef, useCallback } from 'react';
 
-/* ────────────────────────────────────────────
-   CSS injected as a single <style> tag
-   ──────────────────────────────────────────── */
 const css = `
 /* ===== FONTS & RESET ===== */
 @import url('https://fonts.googleapis.com/css2?family=Syne:wght@700;800&family=Space+Mono:wght@400;700&display=swap');
@@ -151,7 +148,7 @@ transform:translate(-50%,-50%);transition:left .3s ease,top .3s ease}
 .section-title{font-family:'Syne',sans-serif;font-weight:800;font-size:clamp(2rem,4vw,3rem);color:#fff;margin-bottom:48px;line-height:1.1}
 
 /* ===== HERO ===== */
-.hero{min-height:100vh;display:flex;align-items:center;position:relative;z-index:2}
+.hero{min-height:100vh;display:flex;align-items:center;position:relative;z-index:2;padding-top:100px}
 .hero-inner{max-width:1200px;margin:0 auto;padding:0 24px;width:100%;display:grid;grid-template-columns:1fr 1fr;align-items:center;gap:40px}
 .hero-content{animation:fadeUp .8s ease forwards}
 .hero-label{font-family:'Space Mono',monospace;font-size:.75rem;color:#00FFD1;text-transform:uppercase;letter-spacing:3px;
@@ -273,8 +270,9 @@ transform:translate(-50%,-50%);transition:left .3s ease,top .3s ease}
 .contact-big{font-family:'Syne',sans-serif;font-weight:800;font-size:clamp(2rem,4vw,3.2rem);color:#fff;line-height:1.15;margin-bottom:40px}
 .contact-big span{color:#00FFD1}
 .contact-row{display:flex;align-items:center;gap:16px;padding:14px 0;border-bottom:1px solid rgba(255,255,255,.05)}
-.contact-row-icon{font-size:1.1rem;width:36px;height:36px;background:rgba(0,255,209,.06);border-radius:8px;
+.contact-row-icon{width:36px;height:36px;background:rgba(0,255,209,.06);border-radius:8px;
   display:flex;align-items:center;justify-content:center}
+.contact-row-icon svg{width:18px;height:18px;stroke:#00FFD1;fill:none;stroke-width:1.5;stroke-linecap:round;stroke-linejoin:round}
 .contact-row-text{font-family:'Space Mono',monospace;font-size:.82rem;color:rgba(255,255,255,.6)}
 .contact-row-text a{color:#00FFD1;text-decoration:none;transition:opacity .3s}
 .contact-row-text a:hover{opacity:.7}
@@ -388,20 +386,29 @@ const QUICK_FACTS = [
   { key: 'Name', val: 'Ram Sripada' },
   { key: 'Location', val: 'Warangal, Telangana' },
   { key: 'Experience', val: 'AI Dev Intern @ Forte AI' },
-  { key: 'Focus', val: 'Full-Stack & AI' },
+  { key: 'Focus', val: 'Problem Solving & Engineering' },
   { key: 'DSA', val: '800+ Problems Solved' },
   { key: 'CGPA', val: '9.25 / 10.0' },
 ];
 
 const ACHIEVEMENTS = [
-  { icon: '🏆', title: '800+ Problems', sub: 'LeetCode · Codeforces · HackerRank' },
-  { icon: '🥇', title: 'Gold Certified Coder', sub: 'Smart Interviews 2025' },
-  { icon: '🚀', title: 'Semi-Finalist', sub: 'CodeNox OctCoder Reloaded 2024' },
+  {
+    icon: '<svg viewBox="0 0 24 24" width="32" height="32" fill="none" stroke="#FFC84A" stroke-width="1.5"><path d="M6 9H4.5a2.5 2.5 0 010-5H6"/><path d="M18 9h1.5a2.5 2.5 0 000-5H18"/><path d="M4 22h16"/><path d="M10 14.66V17c0 .55-.47.98-.97 1.21C7.85 18.75 7 20.24 7 22"/><path d="M14 14.66V17c0 .55.47.98.97 1.21C16.15 18.75 17 20.24 17 22"/><path d="M18 2H6v7a6 6 0 1012 0V2z"/></svg>',
+    title: '800+ Problems',
+    sub: 'LeetCode · Codeforces · HackerRank'
+  },
+  {
+    icon: '<svg viewBox="0 0 24 24" width="32" height="32" fill="none" stroke="#00FFD1" stroke-width="1.5"><circle cx="12" cy="8" r="6"/><path d="M15.477 12.89L17 22l-5-3-5 3 1.523-9.11"/></svg>',
+    title: 'Gold Certified Coder',
+    sub: 'Smart Interviews 2025'
+  },
+  {
+    icon: '<svg viewBox="0 0 24 24" width="32" height="32" fill="none" stroke="#FF6BF8" stroke-width="1.5"><path d="M4 15s1-1 4-1 5 2 8 2 4-1 4-1V3s-1 1-4 1-5-2-8-2-4 1-4 1z"/><line x1="4" y1="22" x2="4" y2="15"/></svg>',
+    title: 'Semi-Finalist',
+    sub: 'CodeNox OctCoder Reloaded 2024'
+  },
 ];
 
-/* ────────────────────────────────────────────
-   COMPONENT
-   ──────────────────────────────────────────── */
 export default function Portfolio() {
   const [activeNav, setActiveNav] = useState('');
   const [menuOpen, setMenuOpen] = useState(false);
@@ -409,7 +416,6 @@ export default function Portfolio() {
   const [mousePos, setMousePos] = useState({ x: -100, y: -100 });
   const [formData, setFormData] = useState({ name: '', email: '', message: '' });
   const [sent, setSent] = useState(false);
-  const [revealedSections, setRevealedSections] = useState(new Set());
 
   const skillsRef = useRef(null);
   const cursorDotRef = useRef(null);
@@ -569,7 +575,7 @@ export default function Portfolio() {
       <section className="hero">
         <div className="hero-inner">
           <div className="hero-content">
-            <div className="hero-label">Full-Stack Developer & AI Engineer</div>
+            <div className="hero-label">Software Engineer & Problem Solver</div>
             <h1 className="hero-name">
               <span className="glitch-name" data-text="Ramnagendra">Ramnagendra</span>
               <br />
@@ -578,8 +584,8 @@ export default function Portfolio() {
               </span>
             </h1>
             <p className="hero-desc">
-              I design and build performant full-stack applications and intelligent AI systems.
-              Passionate about clean code, scalable architecture, and solving complex problems.
+              I engineer robust full-stack systems and tackle complex algorithmic challenges.
+              800+ DSA problems solved. Driven by logic, clean architecture, and shipping real products.
             </p>
             <div className="hero-ctas">
               <a className="btn-primary" href="#projects" onClick={(e) => { e.preventDefault(); scrollTo('projects'); }}>
@@ -647,31 +653,32 @@ export default function Portfolio() {
         <div className="reveal">
           <div className="section-label">About Me</div>
           <h2 className="section-title">
-            Crafting digital<br />experiences that <span style={{ color: '#00FFD1' }}>matter</span>.
+            Engineering solutions<br />that <span style={{ color: '#00FFD1' }}>scale</span>.
           </h2>
         </div>
         <div className="about-grid">
           <div className="about-text reveal reveal-delay-1">
             <p>
               Hey! I'm <span className="about-highlight">Ramnagendra Varma Sripada</span> — a B.Tech CSE student
-              at VNR VJIET (JNTUH) with a <span className="about-highlight">9.25 CGPA</span>, passionate about
-              building software that's both functional and beautiful.
+              at VNR VJIET (JNTUH) with a <span className="about-highlight">9.25 CGPA</span>. I think in
+              algorithms, build in code, and ship products that work.
             </p>
             <p>
-              I've worked as an <span className="about-highlight">AI Developer Intern at Forte AI</span>, where I
-              built responsive web interfaces and developed ML models for HR attrition prediction. I love diving
-              into <span className="about-highlight">full-stack development</span>, <span className="about-highlight">artificial intelligence</span>,
-              and <span className="about-highlight">competitive programming</span>.
+              With <span className="about-highlight">800+ DSA problems</span> solved across LeetCode, Codeforces,
+              and HackerRank, I approach every engineering challenge with structured thinking.
+              As an <span className="about-highlight">AI Developer Intern at Forte AI</span>, I built production
+              web systems and ML models — combining <span className="about-highlight">full-stack engineering</span> with
+              <span className="about-highlight">data-driven problem solving</span>.
             </p>
             <p>
-              When I'm not coding, you'll find me solving algorithmic challenges, exploring
-              system architecture, or reading about startups and productivity.
+              I'm obsessed with clean architecture, efficient algorithms, and turning complex
+              problems into elegant, maintainable solutions.
             </p>
             <div className="about-tags">
               <span className="about-tag available">✦ Available for Internships</span>
-              <span className="about-tag">Full-Stack</span>
-              <span className="about-tag">AI / ML</span>
               <span className="about-tag">Problem Solver</span>
+              <span className="about-tag">Full-Stack</span>
+              <span className="about-tag">Competitive Coder</span>
             </div>
           </div>
           <div className="about-card reveal reveal-delay-2">
@@ -693,7 +700,7 @@ export default function Portfolio() {
         <div className="reveal">
           <div className="section-label">Skills & Tools</div>
           <h2 className="section-title">
-            My technical<br /><span style={{ color: '#FF6BF8' }}>arsenal</span>.
+            My technical<br /><span style={{ color: '#FF6BF8' }}>toolkit</span>.
           </h2>
         </div>
         <div className="skills-grid reveal reveal-delay-1">
@@ -784,7 +791,7 @@ export default function Portfolio() {
         <div className="ach-grid">
           {ACHIEVEMENTS.map((a, i) => (
             <div className={`ach-card reveal reveal-delay-${i + 1}`} key={a.title}>
-              <div className="ach-icon">{a.icon}</div>
+              <div className="ach-icon" dangerouslySetInnerHTML={{ __html: a.icon }} />
               <div className="ach-title">{a.title}</div>
               <div className="ach-sub">{a.sub}</div>
             </div>
@@ -799,26 +806,26 @@ export default function Portfolio() {
             <div className="reveal">
               <div className="section-label">Get In Touch</div>
               <h2 className="contact-big">
-                Let's build<br />something <span>great</span><br />together.
+                Let's solve<br />something <span>complex</span><br />together.
               </h2>
             </div>
             <div className="reveal reveal-delay-1">
               <div className="contact-row">
-                <div className="contact-row-icon">📧</div>
+                <div className="contact-row-icon"><svg viewBox="0 0 24 24"><rect x="2" y="4" width="20" height="16" rx="2" /><path d="M2 4l10 9 10-9" /></svg></div>
                 <div className="contact-row-text">
                   <a href="mailto:sripadaram2005@gmail.com">sripadaram2005@gmail.com</a>
                 </div>
               </div>
               <div className="contact-row">
-                <div className="contact-row-icon">📱</div>
+                <div className="contact-row-icon"><svg viewBox="0 0 24 24"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07 19.5 19.5 0 01-6-6A19.79 19.79 0 012.12 4.18 2 2 0 014.11 2h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L8.09 9.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 16.92z" /></svg></div>
                 <div className="contact-row-text">+91-9533376668</div>
               </div>
               <div className="contact-row">
-                <div className="contact-row-icon">📍</div>
+                <div className="contact-row-icon"><svg viewBox="0 0 24 24"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z" /><circle cx="12" cy="10" r="3" /></svg></div>
                 <div className="contact-row-text">Warangal, Telangana, India</div>
               </div>
               <div className="contact-row">
-                <div className="contact-row-icon">🔗</div>
+                <div className="contact-row-icon"><svg viewBox="0 0 24 24"><path d="M16 8a6 6 0 016 6v7h-4v-7a2 2 0 00-4 0v7h-4v-7a6 6 0 016-6z" /><rect x="2" y="9" width="4" height="12" /><circle cx="4" cy="4" r="2" /></svg></div>
                 <div className="contact-row-text">
                   <a href="https://www.linkedin.com/in/ram-nagendra-sripada-433869291/" target="_blank" rel="noreferrer">
                     LinkedIn Profile
@@ -870,7 +877,7 @@ export default function Portfolio() {
             ) : (
               <div className="contact-form">
                 <div className="sent-state">
-                  <div className="sent-icon">✅</div>
+                  <div className="sent-icon"><svg viewBox="0 0 24 24" width="48" height="48" fill="none" stroke="#00FFD1" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M22 11.08V12a10 10 0 11-5.93-9.14" /><polyline points="22 4 12 14.01 9 11.01" /></svg></div>
                   <div className="sent-title">Message Sent!</div>
                   <div className="sent-desc">Thanks for reaching out. I'll get back to you soon.</div>
                 </div>
