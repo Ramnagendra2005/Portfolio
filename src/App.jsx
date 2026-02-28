@@ -30,10 +30,10 @@ const TECH_STACK = [
 ];
 
 const PROJECTS = [
-  { num: '01', year: '2025', title: 'Daily Dungeon', desc: 'Full-stack MERN productivity platform with task management, goal tracking, journaling, and analytics dashboards for actionable insights.', tags: ['MongoDB', 'Express', 'React', 'Node.js', 'Tailwind'], accent: '#00FFD1', spotColor: 'rgba(0,255,209,.06)' },
-  { num: '02', year: '2025', title: 'Smart Posture', desc: 'AI-powered real-time posture detection using webcam input with ML inference pipelines, alerts, and comprehensive health reports.', tags: ['Python', 'Flask', 'TensorFlow', 'MediaPipe', 'OpenCV'], accent: '#FF6BF8', spotColor: 'rgba(255,107,248,.06)' },
-  { num: '03', year: '2024', title: 'BlogApp', desc: 'Secure full-stack blogging platform with authentication, role-based access control, CRUD operations, and database integrity.', tags: ['Flask', 'SQLite', 'HTML', 'CSS', 'JavaScript'], accent: '#FFC84A', spotColor: 'rgba(255,200,74,.06)' },
-  { num: '04', year: '2025', title: 'Forte AI Website', desc: 'Modern responsive company website with clean UI, plus an HR attrition prediction model using Python and machine learning.', tags: ['React', 'JavaScript', 'Python', 'ML', 'HTML/CSS'], accent: '#4A9FFF', spotColor: 'rgba(74,159,255,.06)' },
+  { num: '01', year: '2025', title: 'Daily Dungeon', desc: 'Full-stack MERN productivity platform with task management, goal tracking, journaling, and analytics dashboards for actionable insights.', tags: ['MongoDB', 'Express', 'React', 'Node.js', 'Tailwind'], accent: '#00FFD1', spotColor: 'rgba(0,255,209,.06)', link: 'https://daily-dungeon.vercel.app' },
+  { num: '02', year: '2025', title: 'Smart Posture', desc: 'AI-powered real-time posture detection using webcam input with ML inference pipelines, alerts, and comprehensive health reports.', tags: ['Python', 'Flask', 'TensorFlow', 'MediaPipe', 'OpenCV'], accent: '#FF6BF8', spotColor: 'rgba(255,107,248,.06)', link: '' },
+  { num: '03', year: '2024', title: 'BlogApp', desc: 'Secure full-stack blogging platform with authentication, role-based access control, CRUD operations, and database integrity.', tags: ['Flask', 'SQLite', 'HTML', 'CSS', 'JavaScript'], accent: '#FFC84A', spotColor: 'rgba(255,200,74,.06)', link: '' },
+  { num: '04', year: '2025', title: 'Forte AI Website', desc: 'Modern responsive company website with clean UI, plus an HR attrition prediction model using Python and machine learning.', tags: ['React', 'JavaScript', 'Python', 'ML', 'HTML/CSS'], accent: '#4A9FFF', spotColor: 'rgba(74,159,255,.06)', link: 'https://forteai.in' },
 ];
 
 const QUICK_FACTS = [
@@ -52,7 +52,7 @@ const ACHIEVEMENTS = [
 ];
 
 const CODING_PROFILES = [
-  { name: 'LeetCode', handle: '@ramsripada', url: 'https://leetcode.com/', color: '#FFA116', glow: 'rgba(255,161,22,.08)', stats: [{ val: '500+', label: 'Solved' }, { val: '1700+', label: 'Rating' }], icon: '<svg viewBox="0 0 24 24" fill="none" stroke="#FFA116" stroke-width="1.5" stroke-linecap="round"><path d="M12 3L2 9l10 6 10-6-10-6z"/><path d="M2 17l10 6 10-6"/><path d="M2 13l10 6 10-6"/></svg>' },
+  { name: 'LeetCode', handle: '@ramsripada', url: 'https://leetcode.com/u/ram_nagendra', color: '#FFA116', glow: 'rgba(255,161,22,.08)', stats: [{ val: '500+', label: 'Solved' }, { val: '1700+', label: 'Rating' }], icon: '<svg viewBox="0 0 24 24" fill="none" stroke="#FFA116" stroke-width="1.5" stroke-linecap="round"><path d="M12 3L2 9l10 6 10-6-10-6z"/><path d="M2 17l10 6 10-6"/><path d="M2 13l10 6 10-6"/></svg>' },
   { name: 'Codeforces', handle: '@ramsripada', url: 'https://codeforces.com/', color: '#1F8ACB', glow: 'rgba(31,138,203,.08)', stats: [{ val: '200+', label: 'Solved' }, { val: 'Pupil', label: 'Rank' }], icon: '<svg viewBox="0 0 24 24" fill="none" stroke="#1F8ACB" stroke-width="1.5"><rect x="3" y="12" width="4" height="9" rx="1"/><rect x="10" y="6" width="4" height="15" rx="1"/><rect x="17" y="3" width="4" height="18" rx="1"/></svg>' },
   { name: 'GeeksforGeeks', handle: '@ramsripada', url: 'https://geeksforgeeks.org/', color: '#2F8D46', glow: 'rgba(47,141,70,.08)', stats: [{ val: '150+', label: 'Solved' }, { val: '5★', label: 'Score' }], icon: '<svg viewBox="0 0 24 24" fill="none" stroke="#2F8D46" stroke-width="1.5"><path d="M5 12a7 7 0 017-7M12 5a7 7 0 017 7M5 12a7 7 0 007 7M19 12a7 7 0 01-7 7M12 10v4M10 12h4"/></svg>' },
   { name: 'HackerRank', handle: '@ramsripada', url: 'https://hackerrank.com/', color: '#00EA64', glow: 'rgba(0,234,100,.08)', stats: [{ val: '5★', label: 'Problem Solving' }, { val: 'Gold', label: 'Badge' }], icon: '<svg viewBox="0 0 24 24" fill="none" stroke="#00EA64" stroke-width="1.5"><path d="M12 2L4 6v12l8 4 8-4V6l-8-4z"/><path d="M9 9v6M15 9v6M9 12h6"/></svg>' },
@@ -228,14 +228,106 @@ export default function Portfolio() {
               <div className="hero-stat"><h3>{counts[2]}<span>+</span></h3><p>Problems Solved</p></div>
             </div>
           </div>
+
+          {/* ═══ HERO VISUAL — Abstract Geometric Code Visualization ═══ */}
           <div className="hero-visual">
-            <div className="orbit-container">
-              <div className="orbit-glow" />
-              <div className="orbit-ring orbit-ring-1"><div className="orbit-dot orbit-dot-1" /><div className="orbit-dot orbit-dot-4" /></div>
-              <div className="orbit-ring orbit-ring-2"><div className="orbit-dot orbit-dot-2" /></div>
-              <div className="orbit-ring orbit-ring-3"><div className="orbit-dot orbit-dot-3" /></div>
-              <div className="orbit-center" /><div className="orbit-center-inner" />
-              {[...Array(6)].map((_, i) => (<div key={i} className="float-particle" style={{ width: 4 + Math.random() * 4, height: 4 + Math.random() * 4, background: ['#00FFD1', '#FF6BF8', '#FFC84A'][i % 3], top: `${15 + Math.random() * 70}%`, left: `${15 + Math.random() * 70}%`, opacity: 0.3 + Math.random() * 0.4, animationDelay: `${i * 0.7}s`, animationDuration: `${4 + Math.random() * 3}s` }} />))}
+            <div className="dev-scene">
+              <div className="dev-glitch-wrap">
+                <svg className="dev-illustration" viewBox="0 0 500 500" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  {/* Outer rotating rings */}
+                  <circle cx="250" cy="250" r="220" stroke="rgba(0,255,209,.06)" strokeWidth="1" strokeDasharray="6 12" />
+                  <circle cx="250" cy="250" r="180" stroke="rgba(0,255,209,.04)" strokeWidth="1" strokeDasharray="4 16" />
+                  {/* Circuit board lines */}
+                  <path d="M80 120 L140 120 L160 140 L160 200" stroke="rgba(0,255,209,.1)" strokeWidth="1" />
+                  <path d="M420 120 L360 120 L340 140 L340 200" stroke="rgba(0,255,209,.1)" strokeWidth="1" />
+                  <path d="M80 380 L140 380 L160 360 L160 300" stroke="rgba(0,255,209,.08)" strokeWidth="1" />
+                  <path d="M420 380 L360 380 L340 360 L340 300" stroke="rgba(0,255,209,.08)" strokeWidth="1" />
+                  {/* Circuit nodes */}
+                  <circle cx="80" cy="120" r="3" fill="rgba(0,255,209,.2)" />
+                  <circle cx="420" cy="120" r="3" fill="rgba(0,255,209,.15)" />
+                  <circle cx="80" cy="380" r="3" fill="rgba(0,255,209,.12)" />
+                  <circle cx="420" cy="380" r="3" fill="rgba(0,255,209,.18)" />
+                  <circle cx="160" cy="200" r="2" fill="rgba(0,255,209,.25)" />
+                  <circle cx="340" cy="200" r="2" fill="rgba(0,255,209,.25)" />
+                  {/* Hexagonal nodes */}
+                  <polygon points="250,50 275,64 275,92 250,106 225,92 225,64" fill="rgba(0,255,209,.03)" stroke="rgba(0,255,209,.15)" strokeWidth="1" />
+                  <text x="250" y="82" textAnchor="middle" fill="rgba(0,255,209,.4)" fontFamily="Space Mono" fontSize="10">{'<>'}</text>
+                  <polygon points="420,230 445,244 445,272 420,286 395,272 395,244" fill="rgba(0,255,209,.03)" stroke="rgba(0,255,209,.12)" strokeWidth="1" />
+                  <text x="420" y="262" textAnchor="middle" fill="rgba(0,255,209,.35)" fontFamily="Space Mono" fontSize="10">JS</text>
+                  <polygon points="250,400 275,414 275,442 250,456 225,442 225,414" fill="rgba(0,255,209,.03)" stroke="rgba(0,255,209,.15)" strokeWidth="1" />
+                  <text x="250" y="432" textAnchor="middle" fill="rgba(0,255,209,.4)" fontFamily="Space Mono" fontSize="10">fn</text>
+                  <polygon points="80,230 105,244 105,272 80,286 55,272 55,244" fill="rgba(0,255,209,.03)" stroke="rgba(0,255,209,.12)" strokeWidth="1" />
+                  <text x="80" y="262" textAnchor="middle" fill="rgba(0,255,209,.35)" fontFamily="Space Mono" fontSize="9">API</text>
+                  {/* Connection lines to center */}
+                  <line x1="250" y1="106" x2="250" y2="175" stroke="rgba(0,255,209,.1)" strokeWidth="1" strokeDasharray="4 4" />
+                  <line x1="395" y1="258" x2="325" y2="250" stroke="rgba(0,255,209,.08)" strokeWidth="1" strokeDasharray="4 4" />
+                  <line x1="250" y1="400" x2="250" y2="325" stroke="rgba(0,255,209,.1)" strokeWidth="1" strokeDasharray="4 4" />
+                  <line x1="105" y1="258" x2="175" y2="250" stroke="rgba(0,255,209,.08)" strokeWidth="1" strokeDasharray="4 4" />
+                  {/* Central diamond */}
+                  <polygon points="250,170 330,250 250,330 170,250" fill="rgba(0,255,209,.02)" stroke="rgba(0,255,209,.25)" strokeWidth="1.5" />
+                  <polygon points="250,190 310,250 250,310 190,250" fill="rgba(0,255,209,.03)" stroke="rgba(0,255,209,.15)" strokeWidth="1" />
+                  {/* Terminal window */}
+                  <rect x="195" y="210" width="110" height="80" rx="6" fill="#0a0a0a" stroke="rgba(0,255,209,.2)" strokeWidth="1.5" />
+                  <rect x="195" y="210" width="110" height="12" rx="6" fill="rgba(255,255,255,.03)" />
+                  <circle cx="204" cy="216" r="2" fill="rgba(255,107,248,.35)" />
+                  <circle cx="212" cy="216" r="2" fill="rgba(255,200,74,.35)" />
+                  <circle cx="220" cy="216" r="2" fill="rgba(0,255,209,.35)" />
+                  <text x="270" y="219" textAnchor="middle" fill="rgba(255,255,255,.12)" fontFamily="Space Mono" fontSize="5">terminal</text>
+                  <text x="202" y="234" fill="rgba(0,255,209,.5)" fontFamily="Space Mono" fontSize="6">$ npm run dev</text>
+                  <text x="202" y="244" fill="rgba(255,255,255,.15)" fontFamily="Space Mono" fontSize="5.5">✓ ready in 99ms</text>
+                  <text x="202" y="254" fill="rgba(0,255,209,.3)" fontFamily="Space Mono" fontSize="5.5">➜ localhost:5173</text>
+                  <rect x="202" y="260" width="30" height="2" rx="1" fill="rgba(255,107,248,.2)" />
+                  <rect x="236" y="260" width="50" height="2" rx="1" fill="rgba(255,255,255,.08)" />
+                  <rect x="202" y="267" width="60" height="2" rx="1" fill="rgba(0,255,209,.15)" />
+                  <rect x="202" y="274" width="45" height="2" rx="1" fill="rgba(255,255,255,.06)" />
+                  <rect x="202" y="281" width="20" height="2" rx="1" fill="rgba(255,200,74,.15)" />
+                  {/* Orbiting data points */}
+                  <circle cx="250" cy="145" r="4" fill="rgba(0,255,209,.3)"><animateTransform attributeName="transform" type="rotate" values="0 250 250;360 250 250" dur="20s" repeatCount="indefinite" /></circle>
+                  <circle cx="355" cy="250" r="3" fill="rgba(255,107,248,.25)"><animateTransform attributeName="transform" type="rotate" values="0 250 250;-360 250 250" dur="15s" repeatCount="indefinite" /></circle>
+                  <circle cx="250" cy="355" r="3.5" fill="rgba(255,200,74,.2)"><animateTransform attributeName="transform" type="rotate" values="0 250 250;360 250 250" dur="25s" repeatCount="indefinite" /></circle>
+                  <circle cx="145" cy="250" r="3" fill="rgba(0,255,209,.2)"><animateTransform attributeName="transform" type="rotate" values="0 250 250;-360 250 250" dur="18s" repeatCount="indefinite" /></circle>
+                  {/* Corner brackets */}
+                  <path d="M40 40 L40 70" stroke="rgba(0,255,209,.12)" strokeWidth="1.5" />
+                  <path d="M40 40 L70 40" stroke="rgba(0,255,209,.12)" strokeWidth="1.5" />
+                  <path d="M460 40 L460 70" stroke="rgba(0,255,209,.12)" strokeWidth="1.5" />
+                  <path d="M460 40 L430 40" stroke="rgba(0,255,209,.12)" strokeWidth="1.5" />
+                  <path d="M40 460 L40 430" stroke="rgba(0,255,209,.12)" strokeWidth="1.5" />
+                  <path d="M40 460 L70 460" stroke="rgba(0,255,209,.12)" strokeWidth="1.5" />
+                  <path d="M460 460 L460 430" stroke="rgba(0,255,209,.12)" strokeWidth="1.5" />
+                  <path d="M460 460 L430 460" stroke="rgba(0,255,209,.12)" strokeWidth="1.5" />
+                  {/* Floating text labels */}
+                  <text x="370" y="150" fill="rgba(0,255,209,.12)" fontFamily="Space Mono" fontSize="7" transform="rotate(-15 370 150)">REACT</text>
+                  <text x="100" y="160" fill="rgba(255,107,248,.1)" fontFamily="Space Mono" fontSize="7" transform="rotate(10 100 160)">NODE.JS</text>
+                  <text x="380" y="400" fill="rgba(255,200,74,.1)" fontFamily="Space Mono" fontSize="7" transform="rotate(-8 380 400)">DSA</text>
+                  <text x="90" y="410" fill="rgba(0,255,209,.1)" fontFamily="Space Mono" fontSize="7" transform="rotate(12 90 410)">C++</text>
+                  {/* Central glow */}
+                  <circle cx="250" cy="250" r="60" fill="rgba(0,255,209,.02)" filter="url(#glow)" />
+                  <defs><filter id="glow"><feGaussianBlur stdDeviation="8" result="blur" /><feMerge><feMergeNode in="blur" /><feMergeNode in="SourceGraphic" /></feMerge></filter></defs>
+                </svg>
+                {/* Glitch layer 1 - pink */}
+                <svg className="dev-illustration dev-glitch-1" viewBox="0 0 500 500" fill="none" aria-hidden="true">
+                  <polygon points="250,170 330,250 250,330 170,250" fill="rgba(255,107,248,.02)" stroke="rgba(255,107,248,.2)" strokeWidth="1.5" />
+                  <polygon points="250,190 310,250 250,310 190,250" fill="rgba(255,107,248,.02)" stroke="rgba(255,107,248,.12)" strokeWidth="1" />
+                  <rect x="195" y="210" width="110" height="80" rx="6" fill="#0a0a0a" stroke="rgba(255,107,248,.2)" strokeWidth="1.5" />
+                  <circle cx="250" cy="250" r="220" stroke="rgba(255,107,248,.04)" strokeWidth="1" strokeDasharray="6 12" />
+                  <polygon points="250,50 275,64 275,92 250,106 225,92 225,64" fill="rgba(255,107,248,.02)" stroke="rgba(255,107,248,.1)" strokeWidth="1" />
+                  <polygon points="250,400 275,414 275,442 250,456 225,442 225,414" fill="rgba(255,107,248,.02)" stroke="rgba(255,107,248,.1)" strokeWidth="1" />
+                </svg>
+                {/* Glitch layer 2 - cyan */}
+                <svg className="dev-illustration dev-glitch-2" viewBox="0 0 500 500" fill="none" aria-hidden="true">
+                  <polygon points="250,170 330,250 250,330 170,250" fill="rgba(0,255,209,.02)" stroke="rgba(0,255,209,.25)" strokeWidth="1.5" />
+                  <polygon points="250,190 310,250 250,310 190,250" fill="rgba(0,255,209,.02)" stroke="rgba(0,255,209,.15)" strokeWidth="1" />
+                  <rect x="195" y="210" width="110" height="80" rx="6" fill="#0a0a0a" stroke="rgba(0,255,209,.25)" strokeWidth="1.5" />
+                  <circle cx="250" cy="250" r="220" stroke="rgba(0,255,209,.05)" strokeWidth="1" strokeDasharray="6 12" />
+                  <polygon points="420,230 445,244 445,272 420,286 395,272 395,244" fill="rgba(0,255,209,.02)" stroke="rgba(0,255,209,.1)" strokeWidth="1" />
+                  <polygon points="80,230 105,244 105,272 80,286 55,272 55,244" fill="rgba(0,255,209,.02)" stroke="rgba(0,255,209,.1)" strokeWidth="1" />
+                </svg>
+              </div>
+              {/* Floating code particles */}
+              {['</', '/>', 'fn', '{}', '()', '&&', '=>', '[]', '++', '||'].map((s, i) => (
+                <span key={i} className="code-particle" style={{ top: `${5 + (i * 10) % 85}%`, left: `${2 + (i * 11) % 90}%`, animationDelay: `${i * 0.7}s`, color: ['#00FFD1', '#FF6BF8', '#FFC84A', '#4A9FFF'][i % 4] }}>{s}</span>
+              ))}
+              <div className="monitor-glow" />
             </div>
           </div>
         </div>
@@ -300,11 +392,22 @@ export default function Portfolio() {
           {PROJECTS.map((p, i) => (
             <div className={`project-card reveal reveal-delay-${i + 1}`} key={p.num} style={{ '--accent': p.accent, '--sc': p.spotColor }} onMouseMove={handleSpotlight} onMouseLeave={handleTiltLeave}>
               <div className="project-number">{p.num}</div>
-              <div className="project-arrow">↗</div>
+              {p.link ? (
+                <a className="project-arrow" href={p.link} target="_blank" rel="noreferrer" title="View Live Demo" onClick={(e) => e.stopPropagation()}>↗</a>
+              ) : (
+                <div className="project-arrow" style={{ opacity: 0.3, cursor: 'default' }}>↗</div>
+              )}
               <div className="project-year">{p.year}</div>
               <h3 className="project-title">{p.title}</h3>
               <p className="project-desc">{p.desc}</p>
               <div className="project-tags">{p.tags.map((t) => (<span className="project-tag" key={t}>{t}</span>))}</div>
+              <div className="project-links">
+                {p.link ? (
+                  <a className="project-link-btn" href={p.link} target="_blank" rel="noreferrer">Live Demo <span>↗</span></a>
+                ) : (
+                  <span className="project-link-btn project-link-disabled">Coming Soon</span>
+                )}
+              </div>
             </div>
           ))}
         </div>
