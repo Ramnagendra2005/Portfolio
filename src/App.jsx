@@ -52,11 +52,9 @@ const ACHIEVEMENTS = [
 ];
 
 const CODING_PROFILES = [
-  { name: 'LeetCode', handle: '@ramsripada', url: 'https://leetcode.com/u/ram_nagendra', color: '#FFA116', glow: 'rgba(255,161,22,.08)', stats: [{ val: '500+', label: 'Solved' }, { val: '1700+', label: 'Rating' }], icon: '<svg viewBox="0 0 24 24" fill="none" stroke="#FFA116" stroke-width="1.5" stroke-linecap="round"><path d="M12 3L2 9l10 6 10-6-10-6z"/><path d="M2 17l10 6 10-6"/><path d="M2 13l10 6 10-6"/></svg>' },
-  { name: 'Codeforces', handle: '@ramsripada', url: 'https://codeforces.com/', color: '#1F8ACB', glow: 'rgba(31,138,203,.08)', stats: [{ val: '200+', label: 'Solved' }, { val: 'Pupil', label: 'Rank' }], icon: '<svg viewBox="0 0 24 24" fill="none" stroke="#1F8ACB" stroke-width="1.5"><rect x="3" y="12" width="4" height="9" rx="1"/><rect x="10" y="6" width="4" height="15" rx="1"/><rect x="17" y="3" width="4" height="18" rx="1"/></svg>' },
-  { name: 'GeeksforGeeks', handle: '@ramsripada', url: 'https://geeksforgeeks.org/', color: '#2F8D46', glow: 'rgba(47,141,70,.08)', stats: [{ val: '150+', label: 'Solved' }, { val: '5★', label: 'Score' }], icon: '<svg viewBox="0 0 24 24" fill="none" stroke="#2F8D46" stroke-width="1.5"><path d="M5 12a7 7 0 017-7M12 5a7 7 0 017 7M5 12a7 7 0 007 7M19 12a7 7 0 01-7 7M12 10v4M10 12h4"/></svg>' },
-  { name: 'HackerRank', handle: '@ramsripada', url: 'https://hackerrank.com/', color: '#00EA64', glow: 'rgba(0,234,100,.08)', stats: [{ val: '5★', label: 'Problem Solving' }, { val: 'Gold', label: 'Badge' }], icon: '<svg viewBox="0 0 24 24" fill="none" stroke="#00EA64" stroke-width="1.5"><path d="M12 2L4 6v12l8 4 8-4V6l-8-4z"/><path d="M9 9v6M15 9v6M9 12h6"/></svg>' },
-  { name: 'CodeChef', handle: '@ramsripada', url: 'https://codechef.com/', color: '#5B4638', glow: 'rgba(91,70,56,.12)', stats: [{ val: '3★', label: 'Rating' }, { val: '100+', label: 'Solved' }], icon: '<svg viewBox="0 0 24 24" fill="none" stroke="#A0785A" stroke-width="1.5"><path d="M12 3c-2 3-5 6-5 11a5 5 0 0010 0c0-5-3-8-5-11z"/><path d="M10 17c1 1 3 1 4 0"/></svg>' },
+  { name: 'LeetCode', handle: '@ram_nagendra', url: 'https://leetcode.com/u/ram_nagendra', color: '#FFA116', glow: 'rgba(255,161,22,.08)', stats: [{ val: '500+', label: 'Solved' }, { val: '1700+', label: 'Rating' }], icon: '<svg viewBox="0 0 24 24" fill="none" stroke="#FFA116" stroke-width="1.5" stroke-linecap="round"><path d="M12 3L2 9l10 6 10-6-10-6z"/><path d="M2 17l10 6 10-6"/><path d="M2 13l10 6 10-6"/></svg>' },
+  { name: 'Codeforces', handle: '@ramnagendra_1103', url: 'https://codeforces.com/profile/ramnagendra_1103', color: '#1F8ACB', glow: 'rgba(31,138,203,.08)', stats: [{ val: '200+', label: 'Solved' }, { val: 'Pupil', label: 'Rank' }], icon: '<svg viewBox="0 0 24 24" fill="none" stroke="#1F8ACB" stroke-width="1.5"><rect x="3" y="12" width="4" height="9" rx="1"/><rect x="10" y="6" width="4" height="15" rx="1"/><rect x="17" y="3" width="4" height="18" rx="1"/></svg>' },
+  { name: 'CodeChef', handle: '@ramnagendra11', url: 'https://codechef.com/users/ramnagendra11', color: '#D4852A', glow: 'rgba(212,133,42,.1)', stats: [{ val: '1496', label: 'Rating' }, { val: '2★', label: '' }, { val: '300+', label: 'Solved' }], icon: '<svg viewBox="0 0 24 24" fill="none" stroke="#D4852A" stroke-width="1.5"><path d="M12 3c-2 3-5 6-5 11a5 5 0 0010 0c0-5-3-8-5-11z"/><path d="M10 17c1 1 3 1 4 0"/></svg>' },
 ];
 
 const CONTACT_WORDS = ["Let's", "solve", "something", "complex", "together."];
@@ -75,6 +73,7 @@ export default function Portfolio() {
   const [expVisible, setExpVisible] = useState(false);
   const [leetcodeData, setLeetcodeData] = useState(null);
   const [lcHover, setLcHover] = useState(false);
+  const [codeforcesData, setCodeforcesData] = useState(null);
 
   const cursorDotRef = useRef(null);
   const cursorRingRef = useRef(null);
@@ -134,10 +133,29 @@ export default function Portfolio() {
 
   /* ── LeetCode data fetch ── */
   useEffect(() => {
-    fetch('https://alfa-leetcode-api.onrender.com/userProfile/ram_nagendra')
+    fetch('https://leetcode-api-faisalshohag.vercel.app/ram_nagendra')
       .then(r => r.json())
       .then(d => setLeetcodeData(d))
       .catch(() => { });
+  }, []);
+
+  /* ── Codeforces data fetch ── */
+  useEffect(() => {
+    const handle = 'ramnagendra_1103';
+    Promise.all([
+      fetch(`https://codeforces.com/api/user.info?handles=${handle}`).then(r => r.json()),
+      fetch(`https://codeforces.com/api/user.status?handle=${handle}`).then(r => r.json())
+    ]).then(([userData, subsData]) => {
+      if (userData.status !== 'OK') return;
+      const user = userData.result[0];
+      const solved = new Set();
+      if (subsData.status === 'OK') {
+        subsData.result.forEach(s => {
+          if (s.verdict === 'OK' && s.problem) solved.add(`${s.problem.contestId}-${s.problem.index}`);
+        });
+      }
+      setCodeforcesData({ rating: user.rating, rank: user.rank, solved: solved.size });
+    }).catch(() => { });
   }, []);
 
   /* ── Scroll reveal ── */
@@ -466,11 +484,15 @@ export default function Portfolio() {
         <div className="profiles-grid">
           {CODING_PROFILES.map((p, i) => {
             const isLeetCode = p.name === 'LeetCode';
+            const isCodeforces = p.name === 'Codeforces';
             const lc = leetcodeData;
-            /* Dynamic stats for LeetCode card */
+            const cf = codeforcesData;
+            /* Dynamic stats for LeetCode / Codeforces cards */
             const dynamicStats = isLeetCode && lc
               ? [{ val: lc.totalSolved, label: 'Solved' }, { val: `#${lc.ranking?.toLocaleString()}`, label: 'Ranking' }]
-              : p.stats;
+              : isCodeforces && cf
+                ? [{ val: cf.solved, label: 'Solved' }, { val: cf.rank ? cf.rank.charAt(0).toUpperCase() + cf.rank.slice(1) : '—', label: 'Rank' }]
+                : p.stats;
 
             return (
               <div

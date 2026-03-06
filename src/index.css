@@ -2195,21 +2195,22 @@ textarea.form-input {
 /* ===== CODING PROFILES ===== */
 .profiles-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
-  gap: 20px
+  grid-template-columns: repeat(3, 1fr);
+  gap: 24px;
+  overflow: visible
 }
 
 .profile-card {
   background: rgba(255, 255, 255, .02);
   border: 1px solid rgba(255, 255, 255, .06);
   border-radius: 16px;
-  padding: 28px 24px;
+  padding: 32px 28px;
   position: relative;
   overflow: hidden;
   transition: all .5s cubic-bezier(.22, 1, .36, 1);
   display: flex;
   flex-direction: column;
-  gap: 16px
+  gap: 20px
 }
 
 .profile-card::before {
@@ -2339,7 +2340,12 @@ textarea.form-input {
 /* ===== LEETCODE TOOLTIP ===== */
 .lc-card-wrap {
   position: relative;
-  overflow: visible !important
+  overflow: visible !important;
+  z-index: 1
+}
+
+.lc-card-wrap:hover {
+  z-index: 50
 }
 
 .lc-tooltip {
