@@ -57,6 +57,7 @@ const CODING_PROFILES = [
   { name: 'CodeChef', handle: '@ramnagendra11', url: 'https://codechef.com/users/ramnagendra11', color: '#D4852A', glow: 'rgba(212,133,42,.1)', stats: [{ val: '1496', label: 'Rating' }, { val: '2★', label: '' }, { val: '300+', label: 'Solved' }], icon: '<svg viewBox="0 0 24 24" fill="none" stroke="#D4852A" stroke-width="1.5"><path d="M12 3c-2 3-5 6-5 11a5 5 0 0010 0c0-5-3-8-5-11z"/><path d="M10 17c1 1 3 1 4 0"/></svg>' },
 ];
 
+
 const CONTACT_WORDS = ["Let's", "solve", "something", "complex", "together."];
 
 const noiseSvg = `<svg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'><filter id='n' x='0' y='0'><feTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4' stitchTiles='stitch'/></filter><rect width='100%' height='100%' filter='url(#n)'/></svg>`;
@@ -182,7 +183,21 @@ export default function Portfolio() {
 
   /* ── Handlers ── */
   const handleInput = useCallback((e) => setFormData((p) => ({ ...p, [e.target.name]: e.target.value })), []);
-  const handleSubmit = useCallback((e) => { e.preventDefault(); setSent(true); setTimeout(() => { setSent(false); setFormData({ name: '', email: '', message: '' }); }, 4000); }, []);
+  const handleSubmit = useCallback(async (e) => {
+    e.preventDefault();
+    try {
+      const res = await fetch('https://api.web3forms.com/submit', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ access_key: 'ab0f7346-bc98-4c6a-9cec-709d7a17db83', ...formData })
+      });
+      const data = await res.json();
+      if (data.success) {
+        setSent(true);
+        setTimeout(() => { setSent(false); setFormData({ name: '', email: '', message: '' }); }, 4000);
+      }
+    } catch { /* silently fail */ }
+  }, [formData]);
   const scrollTo = useCallback((id) => { document.getElementById(id)?.scrollIntoView({ behavior: 'smooth' }); setMenuOpen(false); }, []);
   const handleMagnetic = useCallback((e) => { const b = e.currentTarget, r = b.getBoundingClientRect(); b.style.transform = `translate(${(e.clientX - r.left - r.width / 2) * 0.25}px, ${(e.clientY - r.top - r.height / 2) * 0.25}px)`; }, []);
   const handleMagneticLeave = useCallback((e) => { e.currentTarget.style.transform = ''; }, []);
