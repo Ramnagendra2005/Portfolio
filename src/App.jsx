@@ -52,11 +52,9 @@ const ACHIEVEMENTS = [
 ];
 
 const CODING_PROFILES = [
-  { name: 'LeetCode', handle: '@ramsripada', url: 'https://leetcode.com/u/ram_nagendra', color: '#FFA116', glow: 'rgba(255,161,22,.08)', stats: [{ val: '500+', label: 'Solved' }, { val: '1700+', label: 'Rating' }], icon: '<svg viewBox="0 0 24 24" fill="none" stroke="#FFA116" stroke-width="1.5" stroke-linecap="round"><path d="M12 3L2 9l10 6 10-6-10-6z"/><path d="M2 17l10 6 10-6"/><path d="M2 13l10 6 10-6"/></svg>' },
-  { name: 'Codeforces', handle: '@ramsripada', url: 'https://codeforces.com/', color: '#1F8ACB', glow: 'rgba(31,138,203,.08)', stats: [{ val: '200+', label: 'Solved' }, { val: 'Pupil', label: 'Rank' }], icon: '<svg viewBox="0 0 24 24" fill="none" stroke="#1F8ACB" stroke-width="1.5"><rect x="3" y="12" width="4" height="9" rx="1"/><rect x="10" y="6" width="4" height="15" rx="1"/><rect x="17" y="3" width="4" height="18" rx="1"/></svg>' },
-  { name: 'GeeksforGeeks', handle: '@ramsripada', url: 'https://geeksforgeeks.org/', color: '#2F8D46', glow: 'rgba(47,141,70,.08)', stats: [{ val: '150+', label: 'Solved' }, { val: '5★', label: 'Score' }], icon: '<svg viewBox="0 0 24 24" fill="none" stroke="#2F8D46" stroke-width="1.5"><path d="M5 12a7 7 0 017-7M12 5a7 7 0 017 7M5 12a7 7 0 007 7M19 12a7 7 0 01-7 7M12 10v4M10 12h4"/></svg>' },
-  { name: 'HackerRank', handle: '@ramsripada', url: 'https://hackerrank.com/', color: '#00EA64', glow: 'rgba(0,234,100,.08)', stats: [{ val: '5★', label: 'Problem Solving' }, { val: 'Gold', label: 'Badge' }], icon: '<svg viewBox="0 0 24 24" fill="none" stroke="#00EA64" stroke-width="1.5"><path d="M12 2L4 6v12l8 4 8-4V6l-8-4z"/><path d="M9 9v6M15 9v6M9 12h6"/></svg>' },
-  { name: 'CodeChef', handle: '@ramsripada', url: 'https://codechef.com/', color: '#5B4638', glow: 'rgba(91,70,56,.12)', stats: [{ val: '3★', label: 'Rating' }, { val: '100+', label: 'Solved' }], icon: '<svg viewBox="0 0 24 24" fill="none" stroke="#A0785A" stroke-width="1.5"><path d="M12 3c-2 3-5 6-5 11a5 5 0 0010 0c0-5-3-8-5-11z"/><path d="M10 17c1 1 3 1 4 0"/></svg>' },
+  { name: 'LeetCode', handle: '@ram_nagendra', url: 'https://leetcode.com/u/ram_nagendra', color: '#FFA116', glow: 'rgba(255,161,22,.08)', stats: [{ val: '500+', label: 'Solved' }, { val: '1700+', label: 'Rating' }], icon: '<svg viewBox="0 0 24 24" fill="none" stroke="#FFA116" stroke-width="1.5" stroke-linecap="round"><path d="M12 3L2 9l10 6 10-6-10-6z"/><path d="M2 17l10 6 10-6"/><path d="M2 13l10 6 10-6"/></svg>' },
+  { name: 'Codeforces', handle: '@ramnagendra_1103', url: 'https://codeforces.com/profile/ramnagendra_1103', color: '#1F8ACB', glow: 'rgba(31,138,203,.08)', stats: [{ val: '200+', label: 'Solved' }, { val: 'Pupil', label: 'Rank' }], icon: '<svg viewBox="0 0 24 24" fill="none" stroke="#1F8ACB" stroke-width="1.5"><rect x="3" y="12" width="4" height="9" rx="1"/><rect x="10" y="6" width="4" height="15" rx="1"/><rect x="17" y="3" width="4" height="18" rx="1"/></svg>' },
+  { name: 'CodeChef', handle: '@ramnagendra11', url: 'https://codechef.com/users/ramnagendra11', color: '#D4852A', glow: 'rgba(212,133,42,.1)', stats: [{ val: '1496', label: 'Rating' }, { val: '2★', label: '' }, { val: '300+', label: 'Solved' }], icon: '<svg viewBox="0 0 24 24" fill="none" stroke="#D4852A" stroke-width="1.5"><path d="M12 3c-2 3-5 6-5 11a5 5 0 0010 0c0-5-3-8-5-11z"/><path d="M10 17c1 1 3 1 4 0"/></svg>' },
 ];
 
 const CONTACT_WORDS = ["Let's", "solve", "something", "complex", "together."];
@@ -73,6 +71,9 @@ export default function Portfolio() {
   const [scrolled, setScrolled] = useState(false);
   const [counts, setCounts] = useState([0, 0, 0]);
   const [expVisible, setExpVisible] = useState(false);
+  const [leetcodeData, setLeetcodeData] = useState(null);
+  const [lcHover, setLcHover] = useState(false);
+  const [codeforcesData, setCodeforcesData] = useState(null);
 
   const cursorDotRef = useRef(null);
   const cursorRingRef = useRef(null);
@@ -128,6 +129,33 @@ export default function Portfolio() {
     const obs = new IntersectionObserver(([e]) => { if (e.isIntersecting) setExpVisible(true); }, { threshold: 0.2 });
     obs.observe(expRef.current);
     return () => obs.disconnect();
+  }, []);
+
+  /* ── LeetCode data fetch ── */
+  useEffect(() => {
+    fetch('https://leetcode-api-faisalshohag.vercel.app/ram_nagendra')
+      .then(r => r.json())
+      .then(d => setLeetcodeData(d))
+      .catch(() => { });
+  }, []);
+
+  /* ── Codeforces data fetch ── */
+  useEffect(() => {
+    const handle = 'ramnagendra_1103';
+    Promise.all([
+      fetch(`https://codeforces.com/api/user.info?handles=${handle}`).then(r => r.json()),
+      fetch(`https://codeforces.com/api/user.status?handle=${handle}`).then(r => r.json())
+    ]).then(([userData, subsData]) => {
+      if (userData.status !== 'OK') return;
+      const user = userData.result[0];
+      const solved = new Set();
+      if (subsData.status === 'OK') {
+        subsData.result.forEach(s => {
+          if (s.verdict === 'OK' && s.problem) solved.add(`${s.problem.contestId}-${s.problem.index}`);
+        });
+      }
+      setCodeforcesData({ rating: user.rating, rank: user.rank, solved: solved.size });
+    }).catch(() => { });
   }, []);
 
   /* ── Scroll reveal ── */
@@ -454,28 +482,97 @@ export default function Portfolio() {
           <h2 className="section-title">Where I<br /><span style={{ color: '#FFC84A' }}>compete</span>.</h2>
         </div>
         <div className="profiles-grid">
-          {CODING_PROFILES.map((p, i) => (
-            <div className={`profile-card reveal reveal-delay-${i + 1}`} key={p.name} style={{ '--profile-color': p.color, '--profile-glow': p.glow }}>
-              <div className="profile-card-header">
-                <div className="profile-card-icon" dangerouslySetInnerHTML={{ __html: p.icon }} />
-                <div className="profile-card-info">
-                  <h4>{p.name}</h4>
-                  <p>{p.handle}</p>
-                </div>
-              </div>
-              <div className="profile-card-stats">
-                {p.stats.map((s) => (
-                  <div className="profile-stat" key={s.label}>
-                    <span className="profile-stat-value">{s.val}</span>
-                    <span className="profile-stat-label">{s.label}</span>
+          {CODING_PROFILES.map((p, i) => {
+            const isLeetCode = p.name === 'LeetCode';
+            const isCodeforces = p.name === 'Codeforces';
+            const lc = leetcodeData;
+            const cf = codeforcesData;
+            /* Dynamic stats for LeetCode / Codeforces cards */
+            const dynamicStats = isLeetCode && lc
+              ? [{ val: lc.totalSolved, label: 'Solved' }, { val: `#${lc.ranking?.toLocaleString()}`, label: 'Ranking' }]
+              : isCodeforces && cf
+                ? [{ val: cf.solved, label: 'Solved' }, { val: cf.rank ? cf.rank.charAt(0).toUpperCase() + cf.rank.slice(1) : '—', label: 'Rank' }]
+                : p.stats;
+
+            return (
+              <div
+                className={`profile-card reveal reveal-delay-${i + 1}${isLeetCode ? ' lc-card-wrap' : ''}`}
+                key={p.name}
+                style={{ '--profile-color': p.color, '--profile-glow': p.glow }}
+                onMouseEnter={isLeetCode ? () => setLcHover(true) : undefined}
+                onMouseLeave={isLeetCode ? () => setLcHover(false) : undefined}
+              >
+                <div className="profile-card-header">
+                  <div className="profile-card-icon" dangerouslySetInnerHTML={{ __html: p.icon }} />
+                  <div className="profile-card-info">
+                    <h4>{p.name}</h4>
+                    <p>{p.handle}</p>
                   </div>
-                ))}
+                </div>
+                <div className="profile-card-stats">
+                  {dynamicStats.map((s) => (
+                    <div className="profile-stat" key={s.label}>
+                      <span className="profile-stat-value">{s.val}</span>
+                      <span className="profile-stat-label">{s.label}</span>
+                    </div>
+                  ))}
+                </div>
+                <a className="profile-visit-btn" href={p.url} target="_blank" rel="noreferrer">
+                  Visit Profile <span>↗</span>
+                </a>
+
+                {/* LeetCode hover tooltip */}
+                {isLeetCode && lc && (
+                  <div className={`lc-tooltip${lcHover ? ' show' : ''}`}>
+                    <div className="lc-tooltip-header">
+                      <div className="lc-tooltip-avatar">
+                        <svg viewBox="0 0 120 120" width="80" height="80">
+                          <circle cx="60" cy="60" r="52" stroke="rgba(255,255,255,.06)" strokeWidth="8" fill="none" />
+                          <circle
+                            cx="60" cy="60" r="52"
+                            stroke="#FFA116"
+                            strokeWidth="8"
+                            fill="none"
+                            strokeLinecap="round"
+                            strokeDasharray={`${(lc.totalSolved / lc.totalQuestions) * 327} 327`}
+                            transform="rotate(-90 60 60)"
+                            style={{ transition: 'stroke-dasharray 1s ease' }}
+                          />
+                          <text x="60" y="55" textAnchor="middle" fill="#fff" fontFamily="Syne" fontWeight="800" fontSize="22">{lc.totalSolved}</text>
+                          <text x="60" y="72" textAnchor="middle" fill="rgba(255,255,255,.35)" fontFamily="Space Mono" fontSize="9">/ {lc.totalQuestions}</text>
+                        </svg>
+                      </div>
+                      <div className="lc-tooltip-info">
+                        <div className="lc-tooltip-name">ram_nagendra</div>
+                        <div className="lc-tooltip-rank">#{lc.ranking?.toLocaleString()}</div>
+                      </div>
+                    </div>
+                    <div className="lc-tooltip-bars">
+                      <div className="lc-bar-row">
+                        <span className="lc-bar-label">Easy</span>
+                        <div className="lc-bar-track"><div className="lc-bar-fill lc-easy" style={{ width: `${(lc.easySolved / lc.totalEasy) * 100}%` }} /></div>
+                        <span className="lc-bar-count">{lc.easySolved} <span>/ {lc.totalEasy}</span></span>
+                      </div>
+                      <div className="lc-bar-row">
+                        <span className="lc-bar-label">Medium</span>
+                        <div className="lc-bar-track"><div className="lc-bar-fill lc-medium" style={{ width: `${(lc.mediumSolved / lc.totalMedium) * 100}%` }} /></div>
+                        <span className="lc-bar-count">{lc.mediumSolved} <span>/ {lc.totalMedium}</span></span>
+                      </div>
+                      <div className="lc-bar-row">
+                        <span className="lc-bar-label">Hard</span>
+                        <div className="lc-bar-track"><div className="lc-bar-fill lc-hard" style={{ width: `${(lc.hardSolved / lc.totalHard) * 100}%` }} /></div>
+                        <span className="lc-bar-count">{lc.hardSolved} <span>/ {lc.totalHard}</span></span>
+                      </div>
+                    </div>
+                    <div className="lc-tooltip-footer">
+                      <div className="lc-footer-stat"><span>Contribution</span><strong>{lc.contributionPoint}</strong></div>
+                      <div className="lc-footer-stat"><span>Reputation</span><strong>{lc.reputation}</strong></div>
+                    </div>
+                  </div>
+                )}
               </div>
-              <a className="profile-visit-btn" href={p.url} target="_blank" rel="noreferrer">
-                Visit Profile <span>↗</span>
-              </a>
-            </div>
-          ))}
+            );
+          })}
         </div>
       </section>
 
