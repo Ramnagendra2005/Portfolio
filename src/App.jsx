@@ -73,6 +73,8 @@ export default function Portfolio() {
   const [scrolled, setScrolled] = useState(false);
   const [counts, setCounts] = useState([0, 0, 0]);
   const [expVisible, setExpVisible] = useState(false);
+  const [leetcodeData, setLeetcodeData] = useState(null);
+  const [lcHover, setLcHover] = useState(false);
 
   const cursorDotRef = useRef(null);
   const cursorRingRef = useRef(null);
@@ -128,6 +130,14 @@ export default function Portfolio() {
     const obs = new IntersectionObserver(([e]) => { if (e.isIntersecting) setExpVisible(true); }, { threshold: 0.2 });
     obs.observe(expRef.current);
     return () => obs.disconnect();
+  }, []);
+
+  /* ── LeetCode data fetch ── */
+  useEffect(() => {
+    fetch('https://alfa-leetcode-api.onrender.com/userProfile/ram_nagendra')
+      .then(r => r.json())
+      .then(d => setLeetcodeData(d))
+      .catch(() => { });
   }, []);
 
   /* ── Scroll reveal ── */
@@ -454,28 +464,93 @@ export default function Portfolio() {
           <h2 className="section-title">Where I<br /><span style={{ color: '#FFC84A' }}>compete</span>.</h2>
         </div>
         <div className="profiles-grid">
-          {CODING_PROFILES.map((p, i) => (
-            <div className={`profile-card reveal reveal-delay-${i + 1}`} key={p.name} style={{ '--profile-color': p.color, '--profile-glow': p.glow }}>
-              <div className="profile-card-header">
-                <div className="profile-card-icon" dangerouslySetInnerHTML={{ __html: p.icon }} />
-                <div className="profile-card-info">
-                  <h4>{p.name}</h4>
-                  <p>{p.handle}</p>
-                </div>
-              </div>
-              <div className="profile-card-stats">
-                {p.stats.map((s) => (
-                  <div className="profile-stat" key={s.label}>
-                    <span className="profile-stat-value">{s.val}</span>
-                    <span className="profile-stat-label">{s.label}</span>
+          {CODING_PROFILES.map((p, i) => {
+            const isLeetCode = p.name === 'LeetCode';
+            const lc = leetcodeData;
+            /* Dynamic stats for LeetCode card */
+            const dynamicStats = isLeetCode && lc
+              ? [{ val: lc.totalSolved, label: 'Solved' }, { val: `#${lc.ranking?.toLocaleString()}`, label: 'Ranking' }]
+              : p.stats;
+
+            return (
+              <div
+                className={`profile-card reveal reveal-delay-${i + 1}${isLeetCode ? ' lc-card-wrap' : ''}`}
+                key={p.name}
+                style={{ '--profile-color': p.color, '--profile-glow': p.glow }}
+                onMouseEnter={isLeetCode ? () => setLcHover(true) : undefined}
+                onMouseLeave={isLeetCode ? () => setLcHover(false) : undefined}
+              >
+                <div className="profile-card-header">
+                  <div className="profile-card-icon" dangerouslySetInnerHTML={{ __html: p.icon }} />
+                  <div className="profile-card-info">
+                    <h4>{p.name}</h4>
+                    <p>{p.handle}</p>
                   </div>
-                ))}
+                </div>
+                <div className="profile-card-stats">
+                  {dynamicStats.map((s) => (
+                    <div className="profile-stat" key={s.label}>
+                      <span className="profile-stat-value">{s.val}</span>
+                      <span className="profile-stat-label">{s.label}</span>
+                    </div>
+                  ))}
+                </div>
+                <a className="profile-visit-btn" href={p.url} target="_blank" rel="noreferrer">
+                  Visit Profile <span>↗</span>
+                </a>
+
+                {/* LeetCode hover tooltip */}
+                {isLeetCode && lc && (
+                  <div className={`lc-tooltip${lcHover ? ' show' : ''}`}>
+                    <div className="lc-tooltip-header">
+                      <div className="lc-tooltip-avatar">
+                        <svg viewBox="0 0 120 120" width="80" height="80">
+                          <circle cx="60" cy="60" r="52" stroke="rgba(255,255,255,.06)" strokeWidth="8" fill="none" />
+                          <circle
+                            cx="60" cy="60" r="52"
+                            stroke="#FFA116"
+                            strokeWidth="8"
+                            fill="none"
+                            strokeLinecap="round"
+                            strokeDasharray={`${(lc.totalSolved / lc.totalQuestions) * 327} 327`}
+                            transform="rotate(-90 60 60)"
+                            style={{ transition: 'stroke-dasharray 1s ease' }}
+                          />
+                          <text x="60" y="55" textAnchor="middle" fill="#fff" fontFamily="Syne" fontWeight="800" fontSize="22">{lc.totalSolved}</text>
+                          <text x="60" y="72" textAnchor="middle" fill="rgba(255,255,255,.35)" fontFamily="Space Mono" fontSize="9">/ {lc.totalQuestions}</text>
+                        </svg>
+                      </div>
+                      <div className="lc-tooltip-info">
+                        <div className="lc-tooltip-name">ram_nagendra</div>
+                        <div className="lc-tooltip-rank">#{lc.ranking?.toLocaleString()}</div>
+                      </div>
+                    </div>
+                    <div className="lc-tooltip-bars">
+                      <div className="lc-bar-row">
+                        <span className="lc-bar-label">Easy</span>
+                        <div className="lc-bar-track"><div className="lc-bar-fill lc-easy" style={{ width: `${(lc.easySolved / lc.totalEasy) * 100}%` }} /></div>
+                        <span className="lc-bar-count">{lc.easySolved} <span>/ {lc.totalEasy}</span></span>
+                      </div>
+                      <div className="lc-bar-row">
+                        <span className="lc-bar-label">Medium</span>
+                        <div className="lc-bar-track"><div className="lc-bar-fill lc-medium" style={{ width: `${(lc.mediumSolved / lc.totalMedium) * 100}%` }} /></div>
+                        <span className="lc-bar-count">{lc.mediumSolved} <span>/ {lc.totalMedium}</span></span>
+                      </div>
+                      <div className="lc-bar-row">
+                        <span className="lc-bar-label">Hard</span>
+                        <div className="lc-bar-track"><div className="lc-bar-fill lc-hard" style={{ width: `${(lc.hardSolved / lc.totalHard) * 100}%` }} /></div>
+                        <span className="lc-bar-count">{lc.hardSolved} <span>/ {lc.totalHard}</span></span>
+                      </div>
+                    </div>
+                    <div className="lc-tooltip-footer">
+                      <div className="lc-footer-stat"><span>Contribution</span><strong>{lc.contributionPoint}</strong></div>
+                      <div className="lc-footer-stat"><span>Reputation</span><strong>{lc.reputation}</strong></div>
+                    </div>
+                  </div>
+                )}
               </div>
-              <a className="profile-visit-btn" href={p.url} target="_blank" rel="noreferrer">
-                Visit Profile <span>↗</span>
-              </a>
-            </div>
-          ))}
+            );
+          })}
         </div>
       </section>
 

@@ -2336,6 +2336,173 @@ textarea.form-input {
   opacity: .8
 }
 
+/* ===== LEETCODE TOOLTIP ===== */
+.lc-card-wrap {
+  position: relative;
+  overflow: visible !important
+}
+
+.lc-tooltip {
+  position: absolute;
+  bottom: calc(100% + 14px);
+  left: 50%;
+  transform: translateX(-50%) translateY(10px) scale(.96);
+  width: 320px;
+  background: rgba(14, 14, 14, .98);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1px solid rgba(255, 161, 22, .2);
+  border-radius: 16px;
+  padding: 24px;
+  z-index: 100;
+  pointer-events: none;
+  opacity: 0;
+  transition: all .35s cubic-bezier(.22, 1, .36, 1);
+  box-shadow:
+    0 20px 60px rgba(0, 0, 0, .5),
+    0 0 40px rgba(255, 161, 22, .08),
+    inset 0 1px 0 rgba(255, 255, 255, .04)
+}
+
+.lc-tooltip.show {
+  opacity: 1;
+  transform: translateX(-50%) translateY(0) scale(1);
+  pointer-events: auto
+}
+
+.lc-tooltip::after {
+  content: '';
+  position: absolute;
+  bottom: -6px;
+  left: 50%;
+  transform: translateX(-50%) rotate(45deg);
+  width: 12px;
+  height: 12px;
+  background: rgba(14, 14, 14, .98);
+  border-right: 1px solid rgba(255, 161, 22, .2);
+  border-bottom: 1px solid rgba(255, 161, 22, .2)
+}
+
+.lc-tooltip-header {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  margin-bottom: 20px;
+  padding-bottom: 16px;
+  border-bottom: 1px solid rgba(255, 255, 255, .06)
+}
+
+.lc-tooltip-avatar {
+  flex-shrink: 0;
+  filter: drop-shadow(0 0 8px rgba(255, 161, 22, .2))
+}
+
+.lc-tooltip-name {
+  font-family: 'Syne', sans-serif;
+  font-weight: 800;
+  font-size: 1rem;
+  color: #fff;
+  margin-bottom: 4px
+}
+
+.lc-tooltip-rank {
+  font-family: 'Space Mono', monospace;
+  font-size: .72rem;
+  color: rgba(255, 255, 255, .4)
+}
+
+.lc-tooltip-bars {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  margin-bottom: 18px
+}
+
+.lc-bar-row {
+  display: grid;
+  grid-template-columns: 56px 1fr auto;
+  align-items: center;
+  gap: 10px
+}
+
+.lc-bar-label {
+  font-family: 'Space Mono', monospace;
+  font-size: .68rem;
+  text-transform: uppercase;
+  letter-spacing: .5px;
+  color: rgba(255, 255, 255, .45)
+}
+
+.lc-bar-track {
+  height: 6px;
+  border-radius: 3px;
+  background: rgba(255, 255, 255, .06);
+  overflow: hidden
+}
+
+.lc-bar-fill {
+  height: 100%;
+  border-radius: 3px;
+  transition: width 1s cubic-bezier(.22, 1, .36, 1)
+}
+
+.lc-easy {
+  background: linear-gradient(90deg, #00B8A3, #00E6CC)
+}
+
+.lc-medium {
+  background: linear-gradient(90deg, #FFC01E, #FFD54A)
+}
+
+.lc-hard {
+  background: linear-gradient(90deg, #EF4743, #FF6B6B)
+}
+
+.lc-bar-count {
+  font-family: 'Syne', sans-serif;
+  font-weight: 800;
+  font-size: .78rem;
+  color: #fff;
+  min-width: 70px;
+  text-align: right
+}
+
+.lc-bar-count span {
+  color: rgba(255, 255, 255, .25);
+  font-weight: 400;
+  font-family: 'Space Mono', monospace;
+  font-size: .65rem
+}
+
+.lc-tooltip-footer {
+  display: flex;
+  gap: 16px;
+  padding-top: 14px;
+  border-top: 1px solid rgba(255, 255, 255, .06)
+}
+
+.lc-footer-stat {
+  flex: 1;
+  text-align: center
+}
+
+.lc-footer-stat span {
+  display: block;
+  font-family: 'Space Mono', monospace;
+  font-size: .6rem;
+  color: rgba(255, 255, 255, .3);
+  text-transform: uppercase;
+  letter-spacing: .5px;
+  margin-bottom: 4px
+}
+
+.lc-footer-stat strong {
+  font-family: 'Syne', sans-serif;
+  font-weight: 800;
+  font-size: 1rem;
+  color: #FFA116
+}
+
 /* ===== WAVE SEPARATOR ===== */
 .wave-separator {
   position: relative;
