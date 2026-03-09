@@ -38,11 +38,10 @@ const PROJECTS = [
 
 const QUICK_FACTS = [
   { key: 'Name', val: 'Ram Sripada' },
-  { key: 'Location', val: 'Warangal, Telangana' },
+  { key: 'Location', val: 'Hyderabad, Telangana' },
   { key: 'Experience', val: 'AI Dev Intern @ Forte AI' },
-  { key: 'Focus', val: 'Problem Solving & Engineering' },
+  { key: 'Focus', val: 'Problem Solving & Development' },
   { key: 'DSA', val: '800+ Problems Solved' },
-  { key: 'CGPA', val: '9.25 / 10.0' },
 ];
 
 const ACHIEVEMENTS = [
@@ -260,7 +259,7 @@ export default function Portfolio() {
               <span className="glitch-name text-reveal" data-text="Ramnagendra" style={{ animationDelay: '.4s' }}>Ramnagendra</span><br />
               <span className="glitch-name text-reveal" data-text="Varma Sripada" style={{ color: '#00FFD1', animationDelay: '.7s' }}>Varma Sripada</span>
             </h1>
-            <p className="hero-desc">I engineer robust full-stack systems and tackle complex algorithmic challenges. 800+ DSA problems solved. Driven by logic, clean architecture, and shipping real products.</p>
+            <p className="hero-desc">Driven by Curiosity and Passionate About Learning New Skills. I develop applications that make impact.</p>
             <div className="hero-ctas">
               <a className="btn-primary btn-magnetic" href="#projects" onClick={(e) => { e.preventDefault(); scrollTo('projects'); }} onMouseMove={handleMagnetic} onMouseLeave={handleMagneticLeave}>View Projects</a>
               <a className="btn-secondary btn-magnetic" href="#contact" onClick={(e) => { e.preventDefault(); scrollTo('contact'); }} onMouseMove={handleMagnetic} onMouseLeave={handleMagneticLeave}>Get In Touch</a>
@@ -649,7 +648,7 @@ export default function Portfolio() {
         <div className="footer-copy">© 2025 Ram Sripada. All rights reserved.</div>
         <div className="footer-socials">
           <a className="footer-social" href="https://www.linkedin.com/in/ram-nagendra-sripada-433869291/" target="_blank" rel="noreferrer">LinkedIn</a>
-          <a className="footer-social" href="https://github.com/" target="_blank" rel="noreferrer">GitHub</a>
+          <a className="footer-social" href="https://github.com/Ramnagendra2005" target="_blank" rel="noreferrer">GitHub</a>
           <a className="footer-social" href="mailto:sripadaram2005@gmail.com">Email</a>
         </div>
       </footer>
